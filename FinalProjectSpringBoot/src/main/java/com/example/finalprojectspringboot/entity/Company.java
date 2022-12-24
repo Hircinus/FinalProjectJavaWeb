@@ -22,9 +22,12 @@ public class Company {
     private String description;
     @CreatedDate
     @Column(name = "createdDate")
+    @GeneratedValue
     @Temporal(TemporalType.TIMESTAMP)
     private Date createdDate;
     @LastModifiedDate
+    @Column(name = "updatedDate")
+    @GeneratedValue
     @Temporal(TemporalType.TIMESTAMP)
     private Date updatedDate;
 }
