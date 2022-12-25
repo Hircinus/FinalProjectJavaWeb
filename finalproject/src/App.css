@@ -1,5 +1,5 @@
 .App {
-  text-align: center;
+  font-family: sans-serif
 }
 
 .App-logo {
@@ -35,4 +35,29 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+h3 {
+  margin-left: 10px;
+}
+
+ul {
+  list-style-type: none;
+  margin: 10px;
+}
+ul > li:first-child {
+  border-radius: 5px 5px 0 0
+}
+ul > li:last-child {
+  border-radius: 0 0 5px 5px;
+}
+ul > li:nth-child(odd) {
+  background-color: lightgrey;
+}
+ul > li:hover {
+  background-color: lightblue
+}
+ul > li {
+  transition: background-color 0.25s ease;
+  padding: 10px;
 }
