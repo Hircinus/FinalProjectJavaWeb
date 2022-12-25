@@ -1,7 +1,9 @@
 package com.example.finalprojectspringboot.service;
 
 import com.example.finalprojectspringboot.entity.Company;
+import com.example.finalprojectspringboot.exception.ResourceNotFoundException;
 import com.example.finalprojectspringboot.repository.CompanyRepository;
+import com.example.finalprojectspringboot.request.CompanyRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,5 +16,31 @@ public class CompanyService {
 
     public List<Company> getAllCompanies(){
         return companyRepository.findAll();
+    }
+    public Company addCompany(CompanyRequest companyRequest)
+    {
+        Company company = new Company(companyRequest);
+
+        return companyRepository.save(company);
+    }
+    public Company updateCompany(long companyId, CompanyRequest companyRequest)
+    {
+        companyRepository.findById(companyId)
+                .orElseThrow(()->new ResourceNotFoundException("teacher id is not found"));
+
+        Company companyToBeUpdated = new Company(companyRequest);
+        companyToBeUpdated.setId(companyId);
+
+        return companyRepository.save(companyToBeUpdated);
+
+    }
+
+    public void deleteCompany(long companyId){
+        if(companyRepository.existsById(companyId)){
+            companyRepository.deleteById(companyId);
+        }
+        else{
+            throw new ResourceNotFoundException("company id not found");
+        }
     }
 }

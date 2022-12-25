@@ -1,7 +1,9 @@
 package com.example.finalprojectspringboot.entity;
 
+import com.example.finalprojectspringboot.request.CompanyRequest;
 import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
@@ -13,6 +15,7 @@ import java.util.Date;
 @Setter
 @Entity
 @Table(name = "companies")
+@NoArgsConstructor
 public class Company {
     @Id @GeneratedValue
     private long id;
@@ -20,14 +23,8 @@ public class Company {
     private String name;
     @Column(name = "description")
     private String description;
-    @CreatedDate
-    @Column(name = "createdDate")
-    @GeneratedValue
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date createdDate;
-    @LastModifiedDate
-    @Column(name = "updatedDate")
-    @GeneratedValue
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date updatedDate;
+    public Company(CompanyRequest companyRequest) {
+        this.name = companyRequest.getName();
+        this.description = companyRequest.getDescription();
+    }
 }
