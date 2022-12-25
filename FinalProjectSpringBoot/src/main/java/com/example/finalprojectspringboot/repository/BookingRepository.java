@@ -10,5 +10,5 @@ import java.util.List;
 @Repository
 public interface BookingRepository extends CrudRepository<Booking, Long> {
     List<Booking> findAll();
-    List<Booking> findBookingsByCompany_Id(long companyId);
+    List<Booking> findBookingsByCompanyId(long companyId);
 }

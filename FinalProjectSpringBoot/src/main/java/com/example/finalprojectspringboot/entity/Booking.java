@@ -2,6 +2,7 @@ package com.example.finalprojectspringboot.entity;
 
 import com.example.finalprojectspringboot.request.BookingRequest;
 import com.example.finalprojectspringboot.request.CompanyRequest;
+import com.example.finalprojectspringboot.service.CompanyService;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -22,12 +23,11 @@ public class Booking {
     private String clientName;
     @Column(name = "description")
     private String description;
-    @ManyToOne(optional = false)
-    @JoinColumn(name="company_id")
-    private Company company;
+    @Column(name="company_id")
+    private long companyId;
     public Booking(BookingRequest bookingRequest) {
         this.clientName = bookingRequest.getClientName();
         this.description = bookingRequest.getDescription();
-        this.company = bookingRequest.getCompany();
+        this.companyId = bookingRequest.getCompanyId();
     }
 }

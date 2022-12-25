@@ -19,7 +19,7 @@ public class BookingService {
 
     public List<Booking> getBookingsByCompanyId(long companyId){
 
-        return bookingRepository.findBookingsByCompany_Id(companyId);
+        return bookingRepository.findBookingsByCompanyId(companyId);
     }
     public Booking addBooking(BookingRequest bookingRequest)
     {
@@ -44,7 +44,7 @@ public class BookingService {
             bookingRepository.deleteById(bookingId);
         }
         else{
-            throw new ResourceNotFoundException("company id not found");
+            throw new ResourceNotFoundException("booking id not found");
         }
     }
 }

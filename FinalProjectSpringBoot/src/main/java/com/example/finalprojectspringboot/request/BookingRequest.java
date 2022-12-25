@@ -2,6 +2,7 @@ package com.example.finalprojectspringboot.request;
 
 import com.example.finalprojectspringboot.entity.Company;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -12,6 +13,6 @@ public class BookingRequest {
     private String clientName;
     @NotBlank
     private String description;
-    @NotBlank
-    private Company company;
+    @NotNull
+    private long companyId;
 }

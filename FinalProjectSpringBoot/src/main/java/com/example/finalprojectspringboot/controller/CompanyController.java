@@ -5,6 +5,7 @@ import com.example.finalprojectspringboot.request.CompanyRequest;
 import com.example.finalprojectspringboot.response.CompanyResponse;
 import com.example.finalprojectspringboot.service.CompanyService;
 import jakarta.validation.Valid;
+import org.hibernate.annotations.Parameter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -30,6 +31,12 @@ public class CompanyController {
             companyResponses.add(t);
         });
         return companyResponses;
+    }
+    @GetMapping("/{id}") //when empty it maps to the url above
+    @CrossOrigin(origins="*")
+    public CompanyResponse getTeacherById(@PathVariable long id) {
+        Company company = companyService.getCompanyById(id);
+        return new CompanyResponse(company);
     }
     @PostMapping()
     @CrossOrigin(origins="*")

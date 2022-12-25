@@ -18,13 +18,9 @@ public class CompanyResponse {
     private long id;
     private String name;
     private String description;
-    private Date createdDate;
-    private Date updatedDate;
     public CompanyResponse(Company company) {
         this.id = company.getId();
         this.name = company.getName();
         this.description = company.getDescription();
-        this.createdDate = company.getCreatedDate();
-        this.updatedDate = company.getUpdatedDate();
     }
 }

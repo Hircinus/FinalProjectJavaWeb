@@ -17,6 +17,11 @@ public class CompanyService {
     public List<Company> getAllCompanies(){
         return companyRepository.findAll();
     }
+    public Company getCompanyById(long companyId) {
+        Company company = companyRepository.findById(companyId)
+                .orElseThrow(()->new ResourceNotFoundException("company id is not found"));
+        return company;
+    }
     public Company addCompany(CompanyRequest companyRequest)
     {
         Company company = new Company(companyRequest);
@@ -26,7 +31,7 @@ public class CompanyService {
     public Company updateCompany(long companyId, CompanyRequest companyRequest)
     {
         companyRepository.findById(companyId)
-                .orElseThrow(()->new ResourceNotFoundException("teacher id is not found"));
+                .orElseThrow(()->new ResourceNotFoundException("company id is not found"));
 
         Company companyToBeUpdated = new Company(companyRequest);
         companyToBeUpdated.setId(companyId);

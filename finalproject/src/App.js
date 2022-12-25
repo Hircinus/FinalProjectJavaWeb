@@ -65,20 +65,36 @@ function App() {
     e.target.elements.name.value = "";
     e.target.elements.description.value = "";
   }
+  const viewItem = (id) => {
+    let viewer = document.getElementById("viewer");
+    axios.get('http://localhost:8080/api/companies/' + id, config)
+      .then((response) => {
+        if (response.status === 200) {
+          let item = response.data;
+          var p = document.createElement('p');
+          p.innerHTML = "<p>" + item.name + "<br>" + item.description;
+          viewer.appendChild(p);
+        }
+      })
+  }
   return (
-    <div className="App">
+    <div>
       <ul>
         {
           companies.map((c) => {
-            return <li>{c.name} : {c.description} <button onClick={() => { deleteItem(c.id) }}>Delete</button></li>
+            return <li>{c.name} : {c.description} <button onClick={() => { viewItem(c.id) }}>Select company</button></li>
           })
         }
       </ul>
+      <h3>Create new company</h3>
       <form onSubmit={onSubmitForm}>
         <input type="text" name="name" placeholder="Enter company name..."></input><br />
         <input type="text" name="description" placeholder="Enter company description..."></input><br />
         <button type="submit">Submit</button>
       </form>
+      <div id="viewer">
+
+      </div>
     </div>
   );
 }

@@ -1,8 +1,12 @@
 package com.example.finalprojectspringboot.controller;
 
+import com.example.finalprojectspringboot.entity.Booking;
 import com.example.finalprojectspringboot.entity.Company;
+import com.example.finalprojectspringboot.request.BookingRequest;
 import com.example.finalprojectspringboot.request.CompanyRequest;
+import com.example.finalprojectspringboot.response.BookingResponse;
 import com.example.finalprojectspringboot.response.CompanyResponse;
+import com.example.finalprojectspringboot.service.BookingService;
 import com.example.finalprojectspringboot.service.CompanyService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,39 +25,39 @@ public class BookingController {
 
     @GetMapping() //when empty it maps to the url above
     @CrossOrigin(origins="*")
-    public List<CompanyResponse> getAllTeachers() {
-        List<Company> companies = companyService.getAllCompanies();
-        List<CompanyResponse> companyResponses = new ArrayList<>();
-        companies.forEach(company -> {
-            CompanyResponse t = new CompanyResponse(company);
-            companyResponses.add(t);
+    public List<BookingResponse> getBookingsByCompanyId(@RequestParam(required = true) long companyId) {
+        List<Booking> bookings = bookingService.getBookingsByCompanyId(companyId);
+        List<BookingResponse> bookingResponses = new ArrayList<>();
+        bookings.forEach(booking -> {
+            BookingResponse t = new BookingResponse(booking);
+            bookingResponses.add(t);
         });
-        return companyResponses;
+        return bookingResponses;
     }
     @PostMapping()
     @CrossOrigin(origins="*")
-    public CompanyResponse addCompany(@Valid @RequestBody CompanyRequest companyRequest)
+    public BookingResponse addBooking(@Valid @RequestBody BookingRequest bookingRequest)
     {
 
-        Company savedCompany = companyService.addCompany(companyRequest);
+        Booking savedBooking = bookingService.addBooking(bookingRequest);
 
-        return new CompanyResponse(savedCompany);
+        return new BookingResponse(savedBooking);
 
     }
     @PutMapping("/{id}")
     @CrossOrigin(origins="*")
-    public CompanyResponse updateCompany
+    public BookingResponse updateBooking
             (@PathVariable long id,
-             @Valid @RequestBody CompanyRequest companyRequest){
+             @Valid @RequestBody BookingRequest bookingRequest){
 
-        Company updatedCompany = companyService.updateCompany(id, companyRequest);
-        return new CompanyResponse(updatedCompany);
+        Booking updatedBooking = bookingService.updateBooking(id, bookingRequest);
+        return new BookingResponse(updatedBooking);
     }
 
     @DeleteMapping("/{id}")
     @CrossOrigin(origins="*")
-    public void deleteTeacher(@PathVariable long id)
+    public void deleteBooking(@PathVariable long id)
     {
-        companyService.deleteCompany(id);
+        bookingService.deleteBooking(id);
     }
 }
